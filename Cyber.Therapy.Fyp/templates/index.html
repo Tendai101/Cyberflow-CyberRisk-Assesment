@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Cyber Therapy</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Startup Cyber Therapy</h1>
+    </header>
+    <form action="/calculate_risk" method="POST">
+
+        <label for="business_industry">
+            Select Business Industry:
+            <br>
+            Choose the type of business industry:
+            <br>
+            Finance: Financial institutions and services.
+            <br>
+            Technology: IT and technology companies.
+            <br>
+            Manufacturing: Production and manufacturing industries.
+            <br>
+            Construction: Building and construction sector.
+            <br>
+            Consumer Goods and Services: Products and services for consumers.
+            <br>
+            Transport: Transportation and logistics industry.
+            <br>
+            Government/Military Organisations: Government agencies and military entities.
+            <br>
+            Education: Educational institutions and organizations.
+            <br>
+            Accommodation: Hospitality and accommodation services.
+            <br>
+            SMEs: Small and Medium-sized Enterprises.
+            <br>
+            Agriculture: Farming and agricultural activities.
+            <br>
+            Energy Production: Generation and distribution of energy resources.
+            <br>
+            None: No specific business industry.
+        </label>
+        <select name="business_industry" id="business_industry">
+            <option value="Finance">Finance</option>
+            <option value="Technology">Technology</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Construction">Construction</option>
+            <option value="Consumer Goods and Services">Consumer Goods and Services</option>
+            <option value="Transport">Transport</option>
+            <option value="Government/Military Organisations">Government/Military Organisations</option>
+            <option value="Education">Education</option>
+            <option value="Accommodation">Accommodation</option>
+            <option value="SMEs">SMEs</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Energy Production">Energy Production</option>
+            <option value="None">None</option>
+        </select>
+
+        <h2>Domains of a Typical IT Infrastructure</h2>
+        <label for="user_domain">
+            Select User Domain Security Measures:
+        </label>
+        <label>
+            <p>
+                Security Awareness Training:
+                Comprehensive education and training programs designed to enhance users' understanding of security threats, phishing attacks, social engineering tactics, and best practices for safeguarding sensitive information. Topics may include recognizing suspicious emails, avoiding malware, and reporting security incidents.
+            </p>
+        </label>
+        <label>
+            <p>
+                User Account Policies:
+                Defined policies and procedures governing the creation, management, and usage of user accounts within the system. This includes guidelines for account creation, password complexity, account lockout thresholds, user access levels, and account deactivation protocols.
+            </p>
+        </label>
+        <label>
+            <p>
+                Multi-factor Authentication (MFA):
+                Enhanced security measure that requires users to provide multiple forms of authentication to verify their identities before gaining access to sensitive systems or data. This typically involves a combination of something the user knows (e.g., password), something the user has (e.g., token or smartphone), and/or something the user is (e.g., biometric data).
+            </p>
+        </label>
+        <label>
+            <p>
+                Password Policies:
+                Stringent rules and requirements established to govern the creation, management, and usage of passwords within the system. This includes guidelines for password length, complexity, expiration periods, password reuse prevention, and enforcement of strong authentication factors.
+            </p>
+        </label>
+        <label>
+            <p>
+                User Activity Monitoring:
+                Continuous surveillance and analysis of user actions, behaviors, and interactions with IT resources and systems. This involves monitoring login activities, file access, application usage, network traffic, and other system events to detect and respond to anomalous or suspicious behavior that may indicate potential security threats or policy violations.
+            </p>
+        </label>
+        <label>
+            <p>
+                Privilege Management:
+                Systematic administration and control of user privileges, permissions, and access rights to ensure that users only have access to the resources and data necessary for their roles and responsibilities. This includes defining user roles, assigning appropriate permissions, implementing least privilege principles, and regularly reviewing and auditing user access privileges.
+            </p>
+        </label>
+        <label>
+            <p>
+                Endpoint Security Solutions:
+                Comprehensive security measures and protocols deployed on user devices (endpoints) such as laptops, desktops, smartphones, and tablets to protect against various cyber threats. This includes antivirus software, firewall protection, endpoint detection and response (EDR) solutions, device encryption, application whitelisting, and remote device management capabilities.
+            </p>
+        </label>        
+        
+        <ul>
+            {% for user_domain, rating in user_domain_measure_scores.items() %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="user_domain" value="{{ user_domain }}">
+                        {{ user_domain }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <label for="workstation_domain">
+            Select Workstation Domain Security Measures:
+        </label>
+        <label>
+            <p>
+                Operating System Hardening:
+                Process of configuring operating systems to reduce security risks by implementing various security measures such as disabling unnecessary services, applying security patches, and configuring user access controls.
+            </p>
+        </label>
+        <label>
+            <p>
+                Application Whitelisting:
+                Security mechanism that allows only approved or whitelisted applications to execute on a system while blocking all others. This helps to prevent unauthorized or malicious software from running and reduces the attack surface of the system.
+            </p>
+        </label>
+        <label>
+            <p>
+                Patch Management:
+                Process of regularly updating and applying patches to software, operating systems, and firmware to address known vulnerabilities and security weaknesses. This helps to mitigate the risk of exploitation by malicious actors and ensures that systems remain secure and up-to-date.
+            </p>
+        </label>
+        <label>
+            <p>
+                Disk Encryption:
+                Security technique that encrypts data stored on disk drives to protect it from unauthorized access or theft. This helps to safeguard sensitive information even if physical access to the storage media is obtained by unauthorized individuals.
+            </p>
+        </label>
+        <label>
+            <p>
+                Host-based Firewalls:
+                Firewall software installed on individual computer systems (hosts) to monitor and control incoming and outgoing network traffic based on predetermined security rules. This provides an additional layer of defense against network-based attacks and unauthorized access attempts.
+            </p>
+        </label>
+        <label>
+            <p>
+                Anti-malware Solutions:
+                Software applications designed to detect, prevent, and remove malicious software (malware) such as viruses, worms, Trojans, spyware, and ransomware from computer systems. Anti-malware solutions help to protect systems from infection and minimize the risk of data loss or compromise.
+            </p>
+        </label>
+        <label>
+            <p>
+                Remote Wipe Capability:
+                Feature or functionality that allows administrators to remotely erase data stored on a device (e.g., smartphone, tablet, laptop) in case it is lost, stolen, or compromised. Remote wipe capability helps to prevent unauthorized access to sensitive information and mitigate the risk of data breaches.
+            </p>
+        </label>
+    
+        <ul>
+            {% for workstation_domain, rating in workstation_domain_measure_scores.items() %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="workstation_domain" value="{{ workstation_domain }}">
+                        {{ workstation_domain }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <label for="lan_domain">
+            Select LAN Domain Security Measures:
+        </label>
+        <label>
+            <p>
+                Intrusion Detection/Prevention Systems (IDS/IPS):
+                Security systems that monitor network traffic for suspicious activity or policy violations. IDS (Intrusion Detection Systems) detect and log potential threats, while IPS (Intrusion Prevention Systems) can also take action to block or mitigate detected threats in real-time.
+            </p>
+        </label>
+        <label>
+            <p>
+                Network Segmentation:
+                Dividing a network into smaller subnetworks or segments to improve performance, security, and manageability. Network segmentation helps to isolate sensitive data, limit the scope of potential security breaches, and control traffic flow within the network.
+            </p>
+        </label>
+        <label>
+            <p>
+                Network Access Control (NAC):
+                Security technology that enforces policies to control access to network resources based on users' identities, device health status, and compliance with security policies. NAC solutions help to prevent unauthorized access, enforce security policies, and ensure compliance with regulatory requirements.
+            </p>
+        </label>
+        <label>
+            <p>
+                Switch Security Configuration:
+                Configuration settings and protocols implemented on network switches to enhance security and protect against various cyber threats. This includes features such as port security, VLANs (Virtual Local Area Networks), MAC address filtering, and STP (Spanning Tree Protocol) protection mechanisms.
+            </p>
+        </label>
+        <label>
+            <p>
+                Network Monitoring:
+                Continuous surveillance and analysis of network traffic, devices, and activities to detect and respond to security incidents, performance issues, and policy violations. Network monitoring helps to identify suspicious behavior, troubleshoot network problems, and ensure the availability and integrity of network resources.
+            </p>
+        </label>
+        <label>
+            <p>
+                DNS Security:
+                Measures and protocols implemented to protect the Domain Name System (DNS) infrastructure from various security threats and attacks. DNS security solutions help to prevent DNS hijacking, cache poisoning, DDoS (Distributed Denial of Service) attacks, and other DNS-related vulnerabilities.
+            </p>
+        </label>
+        <label>
+            <p>
+                None:
+                No specific security measures implemented for the LAN Domain.
+            </p>
+        </label>
+        
+        <ul>
+            {% for lan_domain, rating in lan_domain_measure_scores.items() %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="lan_domain" value="{{ lan_domain }}">
+                        {{ lan_domain }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <label for="lan_to_wan_domain">
+            Select LAN-to-WAN Domain Security Measures:
+        </label>
+        <label>
+            <p>
+                Firewalls:
+                Security devices that monitor and control incoming and outgoing network traffic based on predetermined security rules. Firewalls help to enforce network security policies, prevent unauthorized access to the network, and protect against various cyber threats such as malware, intrusions, and data exfiltration.
+            </p>
+        </label>
+        <label>
+            <p>
+                Intrusion Detection/Prevention Systems (IDS/IPS):
+                Security systems that monitor network traffic for suspicious activity or policy violations. IDS (Intrusion Detection Systems) detect and log potential threats, while IPS (Intrusion Prevention Systems) can also take action to block or mitigate detected threats in real-time.
+            </p>
+        </label>
+        <label>
+            <p>
+                Virtual Private Networks (VPN):
+                Secure communication channels established over a public network (typically the internet) to enable remote users or branch offices to securely access the corporate network resources. VPNs provide encryption, authentication, and data integrity mechanisms to protect sensitive data transmitted over insecure networks.
+            </p>
+        </label>
+        <label>
+            <p>
+                Web Content Filtering:
+                Filtering and controlling access to web content based on predefined security policies and criteria. Web content filtering solutions block access to malicious or inappropriate websites, enforce acceptable use policies, and prevent users from accessing harmful content or engaging in risky online behavior.
+            </p>
+        </label>
+        <label>
+            <p>
+                Proxy Servers:
+                Intermediate servers that act as intermediaries between client devices and the internet, forwarding client requests and responses while hiding the client's IP address and enhancing security. Proxy servers can be used to filter web traffic, improve performance, and enforce security policies.
+            </p>
+        </label>
+        <label>
+            <p>
+                Gateway Antivirus:
+                Antivirus software deployed at the network gateway or perimeter to scan and inspect incoming and outgoing network traffic for malware and other security threats. Gateway antivirus solutions help to detect and block malicious content before it reaches the internal network, providing an additional layer of defense against cyber threats.
+            </p>
+        </label>
+        <label>
+            <p>
+                None:
+                No specific security measures implemented for the LAN-to-WAN Domain.
+            </p>
+        </label>
+        
+        <ul>
+            {% for lan_to_wan_domain, rating in lan_to_wan_domain_measure_scores.items() %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="lan_to_wan_domain" value="{{ lan_to_wan_domain }}">
+                        {{ lan_to_wan_domain }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <label for="wan_domain">
+            Select WAN Domain Security Measures:
+        </label>
+        <label>
+            <p>
+                Secure WAN Protocols (e.g., MPLS, IPsec):
+                Encrypted and authenticated communication protocols used to establish secure connections between geographically dispersed network locations over wide area networks (WANs). Secure WAN protocols protect data confidentiality, integrity, and authenticity during transmission over public or private network infrastructures.
+            </p>
+        </label>
+        <label>
+            <p>
+                Encrypted Communication Channels:
+                Encryption mechanisms applied to network communication channels to protect the confidentiality and integrity of data transmitted between endpoints. Encrypted communication channels safeguard sensitive information from eavesdropping, interception, and tampering by unauthorized entities.
+            </p>
+        </label>
+        <label>
+            <p>
+                DDoS Mitigation:
+                Strategies, technologies, and protocols implemented to detect, mitigate, and respond to Distributed Denial of Service (DDoS) attacks targeting network infrastructure and services. DDoS mitigation solutions help to minimize the impact of DDoS attacks by filtering malicious traffic, rerouting legitimate traffic, and preserving network availability.
+            </p>
+        </label>
+        <label>
+            <p>
+                Redundant Connections:
+                Backup or redundant network connections established to ensure continuous connectivity and resilience in the event of primary connection failures or network disruptions. Redundant connections improve network reliability, fault tolerance, and availability by providing alternative pathways for data transmission.
+            </p>
+        </label>
+        <label>
+            <p>
+                Bandwidth Management:
+                Techniques and policies implemented to optimize and manage the allocation, utilization, and prioritization of network bandwidth resources. Bandwidth management solutions help to regulate traffic flow, minimize congestion, and ensure equitable access to network resources for different users and applications.
+            </p>
+        </label>
+        <label>
+            <p>
+                Quality of Service (QoS):
+                Network management techniques and protocols that prioritize and control the delivery of network traffic based on predefined service levels, performance criteria, or user requirements. QoS mechanisms help to guarantee acceptable levels of service for critical applications, minimize latency, and enhance the overall user experience.
+            </p>
+        </label>
+        <label>
+            <p>
+                None:
+                No specific security measures implemented for the WAN Domain.
+            </p>
+        </label>
+        
+        <ul>
+            {% for wan_domain, rating in wan_domain_measure_scores.items() %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="wan_domain" value="{{ wan_domain }}">
+                        {{ wan_domain }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <label for="remote_access_domain">
+            Select Remote Access Domain Security Measures:
+        </label>
+        <label>
+            <p>
+                Secure Remote Access Protocols (e.g., SSL VPN, SSH):
+                Encrypted and authenticated protocols used to establish secure connections between remote users/devices and internal network resources. Secure remote access protocols protect data confidentiality, integrity, and authenticity during remote sessions over public or untrusted networks.
+            </p>
+        </label>
+        <label>
+            <p>
+                Endpoint Security Policies:
+                Policies and configurations applied to endpoint devices (e.g., laptops, smartphones) to enforce security requirements and protect against cyber threats. Endpoint security policies typically include requirements for antivirus software, firewall settings, software updates, and encryption mechanisms.
+            </p>
+        </label>
+        <label>
+            <p>
+                Remote Desktop Protocol (RDP) Security:
+                Security measures and best practices for securing Remote Desktop Protocol (RDP) connections used for remote desktop access. RDP security includes implementing strong authentication mechanisms, restricting access to authorized users, and applying encryption to protect RDP sessions from eavesdropping and unauthorized access.
+            </p>
+        </label>
+        <label>
+            <p>
+                Session Timeout Policies:
+                Policies and settings that automatically terminate user sessions after a specified period of inactivity or idle time. Session timeout policies help to reduce the risk of unauthorized access and protect sensitive information by closing inactive sessions and requiring users to reauthenticate to regain access.
+            </p>
+        </label>
+        <label>
+            <p>
+                Remote Access Auditing:
+                Logging and monitoring of remote access activities, sessions, and events to track user actions, detect suspicious behavior, and ensure compliance with security policies and regulations. Remote access auditing provides visibility into remote access activities and helps organizations identify security incidents or policy violations.
+            </p>
+        </label>
+        <label>
+            <p>
+                Two-Factor Authentication (2FA) for Remote Access:
+                Enhanced authentication method that requires users to provide two different authentication factors to verify their identities before accessing remote resources. Two-factor authentication for remote access typically combines something the user knows (e.g., password) with something the user has (e.g., security token or mobile device).
+            </p>
+        </label>
+        <label>
+            <p>
+                None:
+                No specific security measures implemented for the Remote Access Domain.
+            </p>
+        </label>
+        
+        <ul>
+            {% for remote_access_domain, rating in remote_access_domain_measure_scores.items() %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="remote_access_domain" value="{{ remote_access_domain }}">
+                        {{ remote_access_domain }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <label for="system_application_domain">
+            Select System/Application Domain Security Measures:
+        </label>
+        <label>
+            <p>
+                Secure Development Lifecycle (SDL) Practices:
+                Methodologies and best practices adopted during the software development lifecycle to integrate security into every phase of the development process. Secure SDL practices aim to identify and mitigate security vulnerabilities, design robust and resilient applications, and promote secure coding standards and practices.
+            </p>
+        </label>
+        <label>
+            <p>
+                Application Whitelisting:
+                Security technique that allows only approved or whitelisted applications to execute on a system or network while blocking all others. Application whitelisting helps to prevent unauthorized or malicious software from running, reducing the attack surface and enhancing overall system security.
+            </p>
+        </label>
+        <label>
+            <p>
+                Code Signing:
+                Cryptographic process used to digitally sign software code or scripts to verify the authenticity and integrity of the code before execution. Code signing certificates provide assurance that the software has not been tampered with or modified by unauthorized parties, reducing the risk of running malicious or tampered code.
+            </p>
+        </label>
+        <label>
+            <p>
+                Input Validation:
+                Validation checks and filters implemented to verify the integrity and validity of user input received by an application or system. Input validation helps to prevent common security vulnerabilities such as injection attacks (e.g., SQL injection, cross-site scripting) by sanitizing and validating user-supplied data before processing or storing it.
+            </p>
+        </label>
+        <label>
+            <p>
+                Error Handling:
+                Robust error handling mechanisms and practices implemented within applications and systems to gracefully manage unexpected errors, exceptions, and failures. Effective error handling helps to prevent information disclosure, maintain system stability, and provide informative error messages to users and administrators.
+            </p>
+        </label>
+        <label>
+            <p>
+                Session Management:
+                Techniques and controls used to manage user sessions and maintain session state securely within web applications or online services. Session management mechanisms include session tokens, cookies, timeout settings, and secure session storage to prevent session hijacking, fixation, or tampering attacks.
+            </p>
+        </label>
+        <label>
+            <p>
+                API Security:
+                Security measures and best practices implemented to protect Application Programming Interfaces (APIs) from unauthorized access, abuse, and exploitation. API security includes authentication, authorization, encryption, input validation, rate limiting, and monitoring to ensure the confidentiality, integrity, and availability of API resources and data.
+            </p>
+        </label>
+        <label>
+            <p>
+                Data Encryption:
+                Cryptographic technique used to transform plaintext data into ciphertext to protect its confidentiality and integrity during storage, transmission, or processing. Data encryption mechanisms safeguard sensitive information from unauthorized access, interception, or tampering by encrypting data using cryptographic algorithms and keys.
+            </p>
+        </label>
+        <label>
+            <p>
+                Secure Configuration Management:
+                Processes and controls implemented to establish and maintain secure configurations for systems, applications, and network devices. Secure configuration management involves defining and enforcing baseline security settings, hardening configurations, and regularly auditing and updating system settings to minimize security risks and vulnerabilities.
+            </p>
+        </label>
+        <label>
+            <p>
+                None:
+                No specific security measures implemented for the System/Application Domain.
+            </p>
+        </label>
+        
+        <ul>
+            {% for system_application_domain, rating in system_application_domain_measure_scores.items() %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="system_application_domain" value="{{ system_application_domain }}">
+                        {{ system_application_domain }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <h2>Company Profile</h2>
+        <label for="network_architecture">
+            Select Network Architecture:
+            <br>
+            Choose the type of network architecture:
+            <br>
+            Zero Trust Architecture (ZTA): Modern security model focusing on strict identity verification.
+            <br>
+            Microsegmented Network: Network is divided into segments for improved security.
+            <br>
+            Network Access Control (NAC): Controls access to the network based on user/device attributes.
+            <br>
+            Distributed Networks: Network is spread across multiple locations.
+            <br>
+            Flat Perimeter Networks: Traditional network model with a single security perimeter.
+            <br>
+            Legacy Systems: Outdated and unsupported network infrastructure.
+            <br>
+            Bring Your Own Device Networks: Allows employees to use personal devices on the network.
+            <br>
+            None: No specific network architecture in place.
+        </label>
+        <select name="network_architecture" id="network_architecture">
+            <option value="Zero Trust Architecture (ZTA)">Zero Trust Architecture (ZTA)</option>
+            <option value="Microsegmented Network">Microsegmented Network</option>
+            <option value="Network Access Control (NAC)">Network Access Control (NAC)</option>
+            <option value="Distributed Networks">Distributed Networks</option>
+            <option value="Flat Perimeter Networks">Flat Perimeter Networks</option>
+            <option value="Legacy Systems">Legacy Systems</option>
+            <option value="Bring Your Own Device Networks">Bring Your Own Device Networks</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="inventory">
+            Select Inventory:
+            <br>
+            Select the type of inventory:
+            <br>
+            Air-gapped systems: Physically isolated from other networks.
+            <br>
+            IOT: Internet of Things devices.
+            <br>
+            Physical Servers: Dedicated servers in a physical location.
+            <br>
+            Obsolete systems: Outdated and no longer supported systems.
+        </label>
+        <select name="inventory" id="inventory">
+            <option value="Air-gapped systems">Air-gapped systems</option>
+            <option value="IOT">IOT</option>
+            <option value="Physical Servers">Physical Servers</option>
+            <option value="Obsolete systems">Obsolete systems</option>
+        </select>
+
+        <label for="digital_assets">
+            Company Digital Assets:
+            <br>
+            Choose the type of digital assets:
+            <br>
+            Non-Critical information: Low-risk data.
+            <br>
+            Customer Lists: Lists of customer information.
+            <br>
+            User Credentials: Logins and passwords.
+            <br>
+            Employee Records: Information about employees.
+            <br>
+            Intellectual Property: Company's intellectual assets.
+            <br>
+            Sensitive and Financial Data: High-risk financial information.
+            <br>
+            Healthcare Records: Patient health information.
+            <br>
+            Government data: Sensitive government-related data.
+            <br>
+            Industrial Control Systems(ICS): Systems controlling industrial processes.\
+            <br>
+            Product designs: Designs and plans for products.
+            <br>
+            Critical Infrastructure: Crucial systems for an organization.
+        </label>
+        <select name="digital_assets" id="digital_assets">
+            <option value="Non-Critical information">Non-Critical information</option>
+            <option value="Customer Lists">Customer Lists</option>
+            <option value="User Credentials">User Credentials</option>
+            <option value="Employee Records">Employee Records</option>
+            <option value="Intellectual Property">Intellectual Property</option>
+            <option value="Sensitive and Financial Data">Sensitive and Financial Data</option>
+            <option value="Healthcare Records">Healthcare Records</option>
+            <option value="Government data">Government data</option>
+            <option value="Industrial Control Systems(ICS)">Industrial Control Systems(ICS)</option>
+            <option value="Product designs">Product designs</option>
+            <option value="Critical Infrastructure">Critical Infrastructure</option>
+        </select>
+
+        <label for="third_party">
+            Third Party Services used in Business:
+            <br>
+            Choose the type of third-party services:
+            <br>
+            Private Cloud or managed cloud: Cloud services managed for internal use only.
+            <br>
+            Risk Management Programs: Programs to assess and manage risks associated with third-party services.
+            <br>
+            Software as a service: Cloud-based software provided as a service by third party.
+            <br>
+            Auto Scaling to foreign servers: Automatically scaling resources to servers in foreign locations.
+            <br>
+            Third-Party Data Providers: External providers offering data services.
+            <br>
+            Third party Research and Development Data: Research and development services from external parties.
+            <br>
+            Data managed locally: Data stored and managed on local servers.
+            <br>
+            No cloud: No use of cloud services.
+        </label>
+        <select name="third_party" id="third_party">
+            <option value="Private Cloud or managed cloud">Private Cloud or managed cloud</option>
+            <option value="Risk Management Programs">Risk Management Programs</option>
+            <option value="Software as a service">Software as a service</option>
+            <option value="Auto Scaling to foreign servers">Auto Scaling to foreign servers</option>
+            <option value="Third-Party Data Providers">Third-Party Data Providers</option>
+            <option value="Third party Research and Development Data">Third party Research and Development Data</option>
+            <option value="Data managed locally">Data managed locally</option>
+            <option value="No cloud">No cloud</option>
+        </select>
+
+        <label for="data_flow">
+            Business Confidential Data Flow Methods:
+            <br>
+            Choose the method of data flow:
+            <br>
+            Role-Based Access Controls(RBAC): Access controls based on user roles.
+            <br>
+            VPNs: Virtual Private Networks for secure data transmission.
+            <br>
+            Data Loss Prevention (DLP) System Implemented: System to prevent unauthorized data loss.
+            <br>
+            HeaNet filesender: Secure file transfer service provided by HeaNet.
+            <br>
+            SSH File Transfer Protocols: Secure Shell protocols for file transfer.
+            <br>
+            Managed Work/Staff emails, e.g., Outlook: Managed email system for staff.
+            <br>
+            Personal emails: Use of personal email for communication.
+            <br>
+            None: No defined data flow methods.
+        </label>
+        <select name="data_flow" id="data_flow">
+            <option value="Role-Based Access Controls(RBAC)">Role-Based Access Controls(RBAC)</option>
+            <option value="VPNs">VPNs</option>
+            <option value="Data Loss Prevention (DLP) System Implemented">Data Loss Prevention (DLP) System Implemented</option>
+            <option value="HeaNet filesender">HeaNet filesender</option>
+            <option value="SSH File Transfer Protocols">SSH File Transfer Protocols</option>
+            <option value="Managed Work/Staff emails, eg Outlook">Managed Work/Staff emails, eg Outlook</option>
+            <option value="Personal emails">Personal emails</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="Security_Policies">
+            Business Cyber Security Policies and Procedures:
+            <br>
+            Choose the security policies and procedures:
+            <br>
+            Security Awareness and Training Policy: Policy for educating and training employees on security.
+            <br>
+            Vendor and Third-Party Security Policy: Policy addressing security considerations with vendors.
+            <br>
+            Data Classification and Handling Policy: Policy for classifying and handling sensitive data.
+            <br>
+            Access Control Policy, Password Policy: Policies for controlling access and managing passwords.
+            <br>
+            Acceptable Use Policy: Policy defining acceptable use of company resources.
+            <br>
+            Most policies applied but no awareness training: Implementation of most policies with no awareness training.
+            <br>
+            Remote Work and BYOD Policy if start-up if full-time online: Policies for remote work and Bring Your Own Device.
+            <br>
+            Only one policy applied, e.g., Bring Your Own Device (BYOD) Policy only: Implementation of a single policy.
+            <br>
+            None: No security policies in place.
+        </label>
+        <select name="Security_Policies" id="Security_Policies">
+            <option value="Security Awareness and Training Policy">Security Awareness and Training Policy</option>
+            <option value="Vendor and Third-Party Security Policy">Vendor and Third-Party Security Policy</option>
+            <option value="Data Classification and Handling Policy">Data Classification and Handling Policy</option>
+            <option value="Access Control Policy, Password Policy">Access Control Policy, Password Policy</option>
+            <option value="Acceptable Use Policy">Acceptable Use Policy</option>
+            <option value="Most policies applied but no awareness training">Most policies applied but no awareness training</option>
+            <option value="Remote Work and BYOD Policy if start-up if fulltime online">Remote Work and BYOD Policy if start-up if fulltime online</option>
+            <option value="Only one policy applied eg Bring Your Own Device (BYOD) Policy only">Only one policy applied eg Bring Your Own Device (BYOD) Policy only</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="Patch_Managment">
+            Business Software Patch Management:
+            <br>
+            Choose the software patch management system:
+            <br>
+            Manual Patch Management: Manual process for applying software patches.
+            <br>
+            Outsourced Patch Management: Patch management outsourced to a third party.
+            <br>
+            Automated Patch Management: Automated system for applying software patches.
+            <br>
+            Cloud-Based Patch Management: Patch management system based in the cloud.
+            <br>
+            Patch as a Service (PaaS): Software patches provided as a service.
+            <br>
+            Security Information and Event Management (SIEM) Integration: Integration with SIEM for patch management.
+            <br>
+            Vulnerability Management: System for managing vulnerabilities.
+            <br>
+            DevOps-Integrated Patching: Integration of patching into the DevOps process.
+            <br>
+            Risk-Based Patch Management: Patch management based on risk assessment.
+            <br>
+            No Software Patch Management: No patch management system in place.
+        </label>
+        <select name="Patch_Managment" id="Patch_Managment">
+            <option value="Manual Patch Management">Manual Patch Management</option>
+            <option value="Outsourced Patch Management">Outsourced Patch Management</option>
+            <option value="Automated Patch Management">Data Classification and Handling Policy</option>
+            <option value="Cloud-Based Patch Management">Cloud-Based Patch Management</option>
+            <option value="Patch as a Service (PaaS)">Patch as a Service (PaaS)</option>
+            <option value="Security Information and Event Management (SIEM) Integration">Security Information and Event Management (SIEM) Integration</option>
+            <option value="Vulnerability Management">Vulnerability Management</option>
+            <option value="DevOps-Integrated Patching">DevOps-Integrated Patching</option>
+            <option value="Risk-Based Patch Management">Risk-Based Patch Management</option>
+            <option value="No Software Patch Management">No Software Patch Management</option>
+        </select>
+
+        <label for="Monitoring">
+            Business Monitoring and Detection Method:
+            <br>
+            Choose the monitoring and detection systems:
+            <br>
+            Security Information and Event Management (SIEM): SIEM system for log analysis.
+            <br>
+            Endpoint Detection and Response (EDR): System for detecting and responding to endpoint threats.
+            <br>
+            File Integrity Monitoring (FIM): Monitoring changes to files and file systems.
+            <br>
+            Security Orchestration, Automation, and Response (SOAR): Automated response to security incidents.
+            <br>
+            Intrusion Detection System (IDS): System for detecting unauthorized access.
+            <br>
+            Network Traffic Analysis (NTA): Analysis of network traffic patterns.
+            <br>
+            User and Entity Behavior Analytics (UEBA): Monitoring user behavior for anomalies.
+            <br>
+            Anomaly Detection: Detection of unusual patterns or behavior.
+            <br>
+            Log Management: Centralized management of logs.
+            <br>
+            None: No monitoring and detection systems in place.
+        </label>
+        <select name="Monitoring" id="Monitoring">
+            <option value="Security Information and Event Management (SIEM)">Security Information and Event Management (SIEM)</option>
+            <option value="Endpoint Detection and Response (EDR)">Endpoint Detection and Response (EDR)</option>
+            <option value="File Integrity Monitoring (FIM)">File Integrity Monitoring (FIM)</option>
+            <option value="Security Orchestration, Automation, and Response (SOAR)">Security Orchestration, Automation, and Response (SOAR)</option>
+            <option value="Intrusion Detection System (IDS)">Intrusion Detection System (IDS)</option>
+            <option value="Network Traffic Analysis (NTA)">Network Traffic Analysis (NTA)</option>
+            <option value="User and Entity Behavior Analytics (UEBA)">User and Entity Behavior Analytics (UEBA)</option>
+            <option value="Anomaly Detection">DevOps-Integrated Patching</option>
+            <option value="Log Management">Log Management</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="incident_response">
+            Business Cyber Attack Incident Response Plans:
+            <br>
+            Choose the incident response plans:
+            <br>
+            Continuous Improvement of Systems: Ongoing improvement of security systems.
+            <br>
+            Proactive Incident Response Plan: Proactively designed incident response plan.
+            <br>
+            Integrating systems with Security Operations: Integration of systems with security operations.
+            <br>
+            Playbook-Based Incident Response: Incident response based on predefined playbooks.
+            <br>
+            Tabletop Exercises: Simulation exercises to test incident response.
+            <br>
+            Automation-Driven Incident Response: Incident response driven by automation.
+            <br>
+            Cloud-Centric Incident Response: Incident response designed for cloud-based environments.
+            <br>
+            Collaborative Incident Response: Collaborative approach to incident response.
+            <br>
+            Communication and Public Relations Integration: Integration with communication and public relations.
+            <br>
+            Regulatory Compliance Adherence: Adherence to regulatory compliance in incident response.
+            <br>
+            None: No incident response plans in place.
+        </label>
+        <select name="incident_response" id="incident_response">
+            <option value="Continuous Improvement of Systems">Continuous Improvement of Systems</option>
+            <option value="Proactive Incident Response Plan">Proactive Incident Response Plan</option>
+            <option value="Integrating systems with Security Operations">Integrating systems with Security Operations</option>
+            <option value="Playbook-Based Incident Response">Playbook-Based Incident Response</option>
+            <option value="Tabletop Exercises">Tabletop Exercises</option>
+            <option value="Automation-Driven Incident Response">Automation-Driven Incident Response</option>
+            <option value="Cloud-Centric Incident Response">Cloud-Centric Incident Response</option>
+            <option value="Collaborative Incident Response">Collaborative Incident Response</option>
+            <option value="Communication and Public Relations Integration">Communication and Public Relations Integration</option>
+            <option value="Regulatory Compliance Adherence">Regulatory Compliance Adherence</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="Social_Engineering_Testing">
+            Business Social Engineering Testing:
+            <br>
+            Choose the social engineering testing methods:
+            <br>
+            Almost all techniques listed applied - Phishing Simulations, Vishing (Voice Phishing), Smishing (SMS Phishing), Impersonation Testing, Baiting (Physical Media Drops), USB Drop Tests, Tailgating Tests.
+            <br>
+            None: No social engineering testing conducted.
+        </label>
+        <select name="Social_Engineering_Testing" id="Social_Engineering_Testing">
+            <option value="Almost all techniques listed applied - Phishing Simulations, Vishing (Voice Phishing), Smishing (SMS Phishing), Impersonation Testing, Baiting (Physical Media Drops), USB Drop Tests, Tailgating Tests">Almost all techniques listed applied - Phishing Simulations, Vishing (Voice Phishing), Smishing (SMS Phishing), Impersonation Testing, Baiting (Physical Media Drops), USB Drop Tests, Tailgating Tests</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="Business_Location">
+            Business Physical location:
+            <br>
+            Choose the business location:
+            <br>
+            Latin America: Business operations in Latin America.
+            <br>
+            Africa: Business operations in Africa.
+            <br>
+            Middle East: Business operations in the Middle East.
+            <br>
+            North America: Business operations in North America.
+            <br>
+            Europe: Business operations in Europe.
+            <br>
+            Asia: Business operations in Asia.
+        </label>
+        <select name="Business_Location" id="Business_Location">
+            <option value="Latin America">Latin America</option>
+            <option value="Africa">Africa</option>
+            <option value="Middle East">Middle East</option>
+            <option value="North America">North America</option>
+            <option value="Europe">Europe</option>
+            <option value="Asia">Asia</option>
+        </select>
+        
+        <button type="submit">Calculate Risk</button>
+    </form>
+</body>
+</html>

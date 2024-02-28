@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment</title>
+    <style>
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+            width: 20%;
+            margin-bottom: 15px;
+        }
+
+        button {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form action="/calculate_risk" method="POST">
+        <label for="network_architecture">
+            Select Network Architecture:
+            <br>
+            Choose the type of network architecture:
+            <br>
+            Zero Trust Architecture (ZTA): Modern security model focusing on strict identity verification.
+            <br>
+            Microsegmented Network: Network is divided into segments for improved security.
+            <br>
+            Network Access Control (NAC): Controls access to the network based on user/device attributes.
+            <br>
+            Distributed Networks: Network is spread across multiple locations.
+            <br>
+            Flat Perimeter Networks: Traditional network model with a single security perimeter.
+            <br>
+            Legacy Systems: Outdated and unsupported network infrastructure.
+            <br>
+            Bring Your Own Device Networks: Allows employees to use personal devices on the network.
+            <br>
+            None: No specific network architecture in place.
+        </label>
+        <select name="network_architecture" id="network_architecture">
+            <option value="Zero Trust Architecture (ZTA)">Zero Trust Architecture (ZTA)</option>
+            <option value="Microsegmented Network">Microsegmented Network</option>
+            <option value="Network Access Control (NAC)">Network Access Control (NAC)</option>
+            <option value="Distributed Networks">Distributed Networks</option>
+            <option value="Flat Perimeter Networks">Flat Perimeter Networks</option>
+            <option value="Legacy Systems">Legacy Systems</option>
+            <option value="Bring Your Own Device Networks">Bring Your Own Device Networks</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="inventory">
+            Select Inventory:
+            <br>
+            Select the type of inventory:
+            <br>
+            Air-gapped systems: Physically isolated from other networks.
+            <br>
+            IOT: Internet of Things devices.
+            <br>
+            Physical Servers: Dedicated servers in a physical location.
+            <br>
+            Obsolete systems: Outdated and no longer supported systems.
+        </label>
+        <select name="inventory" id="inventory">
+            <option value="Air-gapped systems">Air-gapped systems</option>
+            <option value="IOT">IOT</option>
+            <option value="Physical Servers">Physical Servers</option>
+            <option value="Obsolete systems">Obsolete systems</option>
+        </select>
+
+        <label for="digital_assets">
+            Company Digital Assets:
+            <br>
+            Choose the type of digital assets:
+            <br>
+            Non-Critical information: Low-risk data.
+            <br>
+            Customer Lists: Lists of customer information.
+            <br>
+            User Credentials: Logins and passwords.
+            <br>
+            Employee Records: Information about employees.
+            <br>
+            Intellectual Property: Company's intellectual assets.
+            <br>
+            Sensitive and Financial Data: High-risk financial information.
+            <br>
+            Healthcare Records: Patient health information.
+            <br>
+            Government data: Sensitive government-related data.
+            <br>
+            Industrial Control Systems(ICS): Systems controlling industrial processes.\
+            <br>
+            Product designs: Designs and plans for products.
+            <br>
+            Critical Infrastructure: Crucial systems for an organization.
+        </label>
+        <select name="digital_assets" id="digital_assets">
+            <option value="Non-Critical information">Non-Critical information</option>
+            <option value="Customer Lists">Customer Lists</option>
+            <option value="User Credentials">User Credentials</option>
+            <option value="Employee Records">Employee Records</option>
+            <option value="Intellectual Property">Intellectual Property</option>
+            <option value="Sensitive and Financial Data">Sensitive and Financial Data</option>
+            <option value="Healthcare Records">Healthcare Records</option>
+            <option value="Government data">Government data</option>
+            <option value="Industrial Control Systems(ICS)">Industrial Control Systems(ICS)</option>
+            <option value="Product designs">Product designs</option>
+            <option value="Critical Infrastructure">Critical Infrastructure</option>
+        </select>
+
+        <label for="third_party">
+            Third Party Services used in Business:
+            <br>
+            Choose the type of third-party services:
+            <br>
+            Private Cloud or managed cloud: Cloud services managed for internal use only.
+            <br>
+            Risk Management Programs: Programs to assess and manage risks associated with third-party services.
+            <br>
+            Software as a service: Cloud-based software provided as a service by third party.
+            <br>
+            Auto Scaling to foreign servers: Automatically scaling resources to servers in foreign locations.
+            <br>
+            Third-Party Data Providers: External providers offering data services.
+            <br>
+            Third party Research and Development Data: Research and development services from external parties.
+            <br>
+            Data managed locally: Data stored and managed on local servers.
+            <br>
+            No cloud: No use of cloud services.
+        </label>
+        <select name="third_party" id="third_party">
+            <option value="Private Cloud or managed cloud">Private Cloud or managed cloud</option>
+            <option value="Risk Management Programs">Risk Management Programs</option>
+            <option value="Software as a service">Software as a service</option>
+            <option value="Auto Scaling to foreign servers">Auto Scaling to foreign servers</option>
+            <option value="Third-Party Data Providers">Third-Party Data Providers</option>
+            <option value="Third party Research and Development Data">Third party Research and Development Data</option>
+            <option value="Data managed locally">Data managed locally</option>
+            <option value="No cloud">No cloud</option>
+        </select>
+
+        <label for="data_flow">
+            Business Confidential Data Flow Methods:
+            <br>
+            Choose the method of data flow:
+            <br>
+            Role-Based Access Controls(RBAC): Access controls based on user roles.
+            <br>
+            VPNs: Virtual Private Networks for secure data transmission.
+            <br>
+            Data Loss Prevention (DLP) System Implemented: System to prevent unauthorized data loss.
+            <br>
+            HeaNet filesender: Secure file transfer service provided by HeaNet.
+            <br>
+            SSH File Transfer Protocols: Secure Shell protocols for file transfer.
+            <br>
+            Managed Work/Staff emails, e.g., Outlook: Managed email system for staff.
+            <br>
+            Personal emails: Use of personal email for communication.
+            <br>
+            None: No defined data flow methods.
+        </label>
+        <select name="data_flow" id="data_flow">
+            <option value="Role-Based Access Controls(RBAC)">Role-Based Access Controls(RBAC)</option>
+            <option value="VPNs">VPNs</option>
+            <option value="Data Loss Prevention (DLP) System Implemented">Data Loss Prevention (DLP) System Implemented</option>
+            <option value="HeaNet filesender">HeaNet filesender</option>
+            <option value="SSH File Transfer Protocols">SSH File Transfer Protocols</option>
+            <option value="Managed Work/Staff emails, eg Outlook">Managed Work/Staff emails, eg Outlook</option>
+            <option value="Personal emails">Personal emails</option>
+            <option value="None">None</option>
+        </select>
+
+        <button type="submit">Calculate Risk</button>
+    </form>
+</body>
+</html>

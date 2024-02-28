@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Risk Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h2 {
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .line-graph-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cyber Risk Report</h1>
+    </header>
+ <div style="max-width: 800px; margin: 20px auto;">
+    <!-- Search Bar -->
+    <label for="attack_id">Enter Attack ID:</label>
+    <input type="text" id="attack_id" name="attack_id">
+    <button onclick="searchAttackDescription()">Search</button>
+    <!-- Result Display -->
+    <h2>Search Result</h2>
+    <textarea id="result" rows="4" cols="50" readonly></textarea>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+   <h2>Business Industry Risk Result</h2>
+   <p>Probability Score: {{ ind_score }}</p>
+   <p>Attack Campaigns:</p>
+   <pre>{{ ind_paragraph }}</pre>
+   <p>Possible Malware:</p>
+   <pre>{{ ind_malware }}</pre>
+   <p>Mitigation Description:</p>
+   <pre>{{ ind_mitigation }}</pre>
+   <p>Vulnerabilities and Attack Mitigated:</p>
+   <pre>{{ ind_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>User Domain Security Measures</h2>
+    <p>Probability Score: {{ ud_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ ud_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ ud_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ ud_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ ud_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+   <!-- Workstation Domain -->
+   <h2>Workstation Domain Security Measures</h2>
+   <p>Probability Score: {{ wd_score }}</p>
+   <p>Attack Campaigns:</p>
+   <pre>{{ wd_paragraph }}</pre>
+   <p>Possible Malware:</p>
+   <pre>{{ wd_malware }}</pre>
+   <p>Mitigation Description:</p>
+   <pre>{{ wd_mitigation }}</pre>
+   <p>Vulnerabilities and Attack Mitigated:</p>
+   <pre>{{ wd_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+   <!-- LAN Domain -->
+   <h2>LAN Domain Security Measures</h2>
+   <p>Probability Score: {{ ld_score }}</p>
+   <p>Attack Campaigns:</p>
+   <pre>{{ ld_paragraph }}</pre>
+   <p>Possible Malware:</p>
+   <pre>{{ ld_malware }}</pre>
+   <p>Mitigation Description:</p>
+   <pre>{{ ld_mitigation }}</pre>
+   <p>Vulnerabilities and Attack Mitigated:</p>
+   <pre>{{ ld_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+   <!-- LAN-to-WAN Domain -->
+   <h2>LAN-to-WAN Domain Security Measures</h2>
+   <p>Probability Score: {{ ltwd_score }}</p>
+   <p>Attack Campaigns:</p>
+   <pre>{{ ltwd_paragraph }}</pre>
+   <p>Possible Malware:</p>
+   <pre>{{ ltwd_malware }}</pre>
+   <p>Mitigation Description:</p>
+   <pre>{{ ltwd_mitigation }}</pre>
+   <p>Vulnerabilities and Attack Mitigated:</p>
+   <pre>{{ ltwd_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+   <!-- WAN Domain -->
+   <h2>WAN Domain Security Measures</h2>
+   <p>Probability Score: {{ wand_score }}</p>
+   <p>Attack Campaigns:</p>
+   <pre>{{ wand_paragraph }}</pre>
+   <p>Possible Malware:</p>
+   <pre>{{ wand_malware }}</pre>
+   <p>Mitigation Description:</p>
+   <pre>{{ wand_mitigation }}</pre>
+   <p>Vulnerabilities and Attack Mitigated:</p>
+   <pre>{{ wand_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+   <!-- Remote Access Domain -->
+   <h2>Remote Access Domain Security Measures</h2>
+   <p>Probability Score: {{ rad_score }}</p>
+   <p>Attack Campaigns:</p>
+   <pre>{{ rad_paragraph }}</pre>
+   <p>Possible Malware:</p>
+   <pre>{{ rad_malware }}</pre>
+   <p>Mitigation Description:</p>
+   <pre>{{ rad_mitigation }}</pre>
+   <p>Vulnerabilities and Attack Mitigated:</p>
+   <pre>{{ rad_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+   <!-- System/Application Domain -->
+   <h2>System/Application Domain Security Measures</h2>
+   <p>Probability Score: {{ sad_score }}</p>
+   <p>Attack Campaigns:</p>
+   <pre>{{ sad_paragraph }}</pre>
+   <p>Possible Malware:</p>
+   <pre>{{ sad_malware }}</pre>
+   <p>Mitigation Description:</p>
+   <pre>{{ sad_mitigation }}</pre>
+   <p>Vulnerabilities and Attack Mitigated:</p>
+   <pre>{{ sad_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Network Risk Result</h2>
+    <p>Probability Score: {{ network_score }}</p>
+    <p>Selected Option CyberRisk Status:</p>
+    <pre>{{ n_description }}</pre>
+    <p>Attack Campaigns:</p>
+    <pre>{{ network_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ network_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ network_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ n_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Inventory Risk Result</h2>
+    <p>Probability Score: {{ inventory_score }}</p>
+    <p>Selected Option CyberRisk Status:</p>
+    <pre>{{ i_description }}</pre>
+    <p>Attack Campaigns:</p>
+    <pre>{{ inventory_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ i_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ inventory_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ i_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Digital Assets Risk Result</h2>
+    <p>Probability Score: {{ d_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ d_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ d_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ d_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ d_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Third Party Services Risk Result</h2>
+    <p>Probability Score: {{ t_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ t_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ t_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ t_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ t_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Confidential Data Flow Methods</h2>
+    <p>Probability Score: {{ df_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ df_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ df_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ df_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ df_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Cyber Security Policies and Procedures</h2>
+    <p>Probability Score: {{ sp_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ sp_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ sp_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ sp_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ sp_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Software Patch Management</h2>
+    <p>Probability Score: {{ pm_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ pm_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ pm_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ pm_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ pm_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Monitoring and Detection Method</h2>
+    <p>Probability Score: {{ md_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ md_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ md_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ md_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ md_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Cyber Attack Incident Response Plans</h2>
+    <p>Probability Score: {{ ir_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ ir_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ ir_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ ir_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ ir_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Social Engineering Testing</h2>
+    <p>Probability Score: {{ s_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ s_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ s_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ s_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ s_mit_data }}</pre>
+ </div>
+
+ <div style="max-width: 800px; margin: 20px auto;">
+    <h2>Business Physical location</h2>
+    <p>Probability Score: {{ bl_score }}</p>
+    <p>Attack Campaigns:</p>
+    <pre>{{ bl_paragraph }}</pre>
+    <p>Possible Malware:</p>
+    <pre>{{ bl_malware }}</pre>
+    <p>Mitigation Description:</p>
+    <pre>{{ bl_mitigation }}</pre>
+    <p>Vulnerilities and Attack Mitigated:</p>
+    <pre>{{ bl_mit_data }}</pre>
+ </div>
+ <div class="button-container">
+   <button class="line-graph-button" onclick="window.location.href='/view_scores'">View Previous Scores</button>
+</div>
+</body>
+
+<script>
+   function searchAttackDescription() {
+       var attackId = document.getElementById('attack_id').value;
+       fetch('/search_attack_description?attack_id=' + attackId)
+           .then(response => response.text())
+           .then(data => {
+               document.getElementById('result').value = data;
+           });
+   }
+</script>
+
+</html>
